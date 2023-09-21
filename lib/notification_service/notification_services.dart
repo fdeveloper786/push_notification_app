@@ -87,16 +87,17 @@ class NotificationServices {
   }
 
   Future<void> showNotification(RemoteMessage remoteMessage) async {
-    AndroidNotificationChannel channel = AndroidNotificationChannel(
-      Random.secure().nextInt(100000).toString(),
+    AndroidNotificationChannel channel = const AndroidNotificationChannel(
+      "high_importance_channel",
+      //Random.secure().nextInt(100000).toString(),
       'High Importance Notifications',
-      importance: Importance.max,
     );
 
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
             channel.id.toString(), channel.name.toString(),
-            channelDescription: "your channel description",
+            channelDescription:
+                "This channel is used for important notification",
             importance: Importance.high,
             priority: Priority.high,
             //channelShowBadge: true,
@@ -168,8 +169,10 @@ class NotificationServices {
       }
     }
   }
+
   Future forgroundMessage() async {
-    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
       sound: true,
