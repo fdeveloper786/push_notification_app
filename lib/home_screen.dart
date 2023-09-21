@@ -23,6 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
       if (kDebugMode) {
         print("---------- Device Token ----------");
         print(value);
+      }else {
+        print("--------- Device Token refeshed -------");
       }
     });
   }
